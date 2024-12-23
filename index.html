@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="verification-container">
+        <h2>Enter a Date to Continue </h2>
+        <input type="text" id="pattern-input" placeholder="Enter numbers (e.g., 1234)">
+        <button id="verify-button">Verify</button>
+        <p id="error-message" style="color: rgb(8, 1, 1); display: none;">Incorrect Date. Please try again.</p>
+    </div>
+
+    <div id="content" style="display: none;">
+        <div class="falling-text">
+            <span>H</span>
+            <span>A</span>
+            <span>P</span>
+            <span>P</span>
+            <span>Y</span>
+            <span> </span>
+            <span>N</span>
+            <span>E</span>
+            <span>W</span>
+            <span> </span>
+            <span>Y</span>
+            <span>E</span>
+            <span>A</span>
+            <span>R</span>
+        </div>
+        <div class="image-container"></div> <!-- Image container for the images to appear -->
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
