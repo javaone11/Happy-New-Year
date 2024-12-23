@@ -57,7 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
             verificationContainer.style.display = "none";
             contentContainer.style.display = "block";
 
-            // Start animations and image display
+            const audio = document.getElementById("backgroundAudio");
+            audio.currentTime = 104;
+
+            audio.play();
             startAnimations();
         } else {
             errorMessage.style.display = "block";
@@ -72,8 +75,8 @@ function startAnimations() {
         const letters = fallingText.querySelectorAll("span");
         const lastLetter = letters[letters.length - 1];
         lastLetter.addEventListener("animationend", () => {
-            fallingText.style.opacity = "0"; // Fade out
-            setTimeout(() => fallingText.remove(), 1000); // Remove after fade-out
+            fallingText.style.opacity = "0"; 
+            setTimeout(() => fallingText.remove(), 1000); 
         });
     }
 
@@ -128,41 +131,39 @@ function startAnimations() {
 
         setTimeout(() => {
             clearImages(images, () => startCollisionEffect());
-        }, initialImages.length * 2000 + 1000); // Wait for all images to be displayed
+        }, initialImages.length * 2000 + 1000); 
     };
 
     const clearImages = (images, callback) => {
         images.forEach(img => {
             img.style.opacity = 0;
-            setTimeout(() => img.remove(), 1000); // Fade out and remove images
+            setTimeout(() => img.remove(), 1000); 
         });
 
         setTimeout(() => {
             if (callback) callback();
-        }, 1500); // Delay before starting the collision effect
+        }, 1500); 
     };
 
     const startCollisionEffect = () => {
         const leftImage = document.createElement('img');
         const rightImage = document.createElement('img');
     
-        leftImage.src = "last1.jpg"; // Replace with actual image source
-        rightImage.src = "last.jpg"; // Replace with actual image source
+        leftImage.src = "last1.jpg"; 
+        rightImage.src = "last.jpg"; 
     
-        // Initial styles for the left image
         leftImage.style.position = 'absolute';
         leftImage.style.width = '600px';
         leftImage.style.height = '600px';
-        leftImage.style.left = '-900px'; // Start off-screen
+        leftImage.style.left = '-900px'; 
         leftImage.style.top = '50%';
         leftImage.style.transform = 'translateY(-50%)';
         leftImage.style.transition = 'left 5s ease-in-out';
     
-        // Initial styles for the right image
         rightImage.style.position = 'absolute';
         rightImage.style.width = '600px';
         rightImage.style.height = '600px';
-        rightImage.style.right = '-900px'; // Start off-screen
+        rightImage.style.right = '-900px'; 
         rightImage.style.top = '50%';
         rightImage.style.transform = 'translateY(-50%)';
         rightImage.style.transition = 'right 5s ease-in-out';
@@ -170,54 +171,47 @@ function startAnimations() {
         document.body.appendChild(leftImage);
         document.body.appendChild(rightImage);
     
-        // Wait for the images to be fully appended before triggering transition
         setTimeout(() => {
-            leftImage.style.left = 'calc(50% - 400px)'; // Move to the center (left image)
-            rightImage.style.right = 'calc(50% - 400px)'; // Move to the center (right image)
-        }, 50); // Small delay to ensure the images are added to the DOM
+            leftImage.style.left = 'calc(50% - 400px)'; 
+            rightImage.style.right = 'calc(50% - 400px)'; 
+        }, 50); 
     
-        // Wait for both images to finish transitioning
         const handleTransitionEnd = (event) => {
-            // Check if both images have finished moving towards the center
             if (
                 leftImage.style.left === 'calc(50% - 400px)' &&
                 rightImage.style.right === 'calc(50% - 400px)'
             ) {
-                // Remove both images after the collision
                 leftImage.remove();
                 rightImage.remove();
     
-                // Add the final image
                 const finalImage = document.createElement('img');
-                finalImage.src = "a31.jpg"; // Replace with actual final image source
+                finalImage.src = "a31.jpg"; 
                 finalImage.style.position = 'absolute';
-                finalImage.style.width = '80vw'; // Adjust width as needed
-                finalImage.style.height = 'auto'; // Adjust height if necessary
-                finalImage.style.maxHeight = '70vh'; // Set max height to ensure responsiveness
+                finalImage.style.width = '80vw'; 
+                finalImage.style.height = 'auto'; 
+                finalImage.style.maxHeight = '70vh'; 
                 finalImage.style.left = '50%';
                 finalImage.style.top = '50%';
                 finalImage.style.transform = 'translate(-50%, -50%)';
                 finalImage.style.opacity = 0;
                 finalImage.style.transition = 'opacity 1s ease-in-out';
-                finalImage.style.border = '5px solid grey'; // Add border
-                finalImage.style.borderRadius = '20px'; // Add border radius
+                finalImage.style.border = '5px solid grey'; 
+                finalImage.style.borderRadius = '20px'; 
     
                 document.body.appendChild(finalImage);
     
                 setTimeout(() => {
-                    finalImage.style.opacity = 1; // Fade in the final image
+                    finalImage.style.opacity = 1; 
                 }, 0);
     
-                // Clean up event listeners
                 leftImage.removeEventListener('transitionend', handleTransitionEnd);
                 rightImage.removeEventListener('transitionend', handleTransitionEnd);
     
-                // Call the function to display the "Happy New Year" message at the end
+      
                 displayHappyNewYearMessage();
             }
         };
     
-        // Add event listeners to both images
         leftImage.addEventListener('transitionend', handleTransitionEnd);
         rightImage.addEventListener('transitionend', handleTransitionEnd);
     };
